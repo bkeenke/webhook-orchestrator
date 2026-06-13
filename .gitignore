@@ -20,6 +20,11 @@ profile.cov
 # Dependency directories (remove the comment below to include it)
 # vendor/
 
+server/web/dist
+server/web/node_modules
+webhook-orchestrator
+build.sh
+
 # Go workspace file
 go.work
 go.work.sum

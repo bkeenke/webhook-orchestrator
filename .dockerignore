@@ -1,0 +1,11 @@
+.git
+.gitignore
+*.md
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store
+build.sh
+server/web/node_modules
+server/web/dist
