@@ -323,6 +323,7 @@ func (s *Store) GetLogs(limit, offset int, terms []string, source, target string
 			return LogsPage{}, err
 		}
 		e.Timestamp, _ = time.Parse(time.RFC3339Nano, ts)
+		e.Targets = []string{}
 		json.Unmarshal([]byte(tjson), &e.Targets)
 		items = append(items, e)
 	}
@@ -392,6 +393,9 @@ func (s *Store) GetLog(id string) (*LogEntry, error) {
 		return nil, err
 	}
 	e.Timestamp, _ = time.Parse(time.RFC3339Nano, ts)
+	e.Headers = map[string]string{}
+	e.Targets = []string{}
+	e.TargetResponses = map[string]TargetResponse{}
 	json.Unmarshal([]byte(hjson), &e.Headers)
 	json.Unmarshal([]byte(tjson), &e.Targets)
 	json.Unmarshal([]byte(trjson), &e.TargetResponses)

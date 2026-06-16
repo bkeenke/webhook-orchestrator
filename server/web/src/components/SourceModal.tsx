@@ -117,18 +117,18 @@ export function SourceModal({ opened, source, onClose }: Props) {
 
   function addCondition(ruleIdx: number) {
     updateRule(ruleIdx, {
-      conditions: [...form.rules[ruleIdx].conditions, newCondition()],
+      conditions: [...(form.rules[ruleIdx].conditions ?? []), newCondition()],
     })
   }
 
   function removeCondition(ruleIdx: number, condIdx: number) {
     updateRule(ruleIdx, {
-      conditions: form.rules[ruleIdx].conditions.filter((_, i) => i !== condIdx),
+      conditions: (form.rules[ruleIdx].conditions ?? []).filter((_, i) => i !== condIdx),
     })
   }
 
   function updateCondition(ruleIdx: number, condIdx: number, patch: Partial<Condition>) {
-    const conditions = form.rules[ruleIdx].conditions.map((c, i) =>
+    const conditions = (form.rules[ruleIdx].conditions ?? []).map((c, i) =>
       i === condIdx ? { ...c, ...patch } : c
     )
     updateRule(ruleIdx, { conditions })
@@ -226,13 +226,13 @@ export function SourceModal({ opened, source, onClose }: Props) {
                   </Button>
                 </Group>
 
-                {rule.conditions.length === 0 && (
+                {(rule.conditions ?? []).length === 0 && (
                   <Badge color="orange" size="sm" variant="light">
                     No conditions — matches ALL requests
                   </Badge>
                 )}
 
-                {rule.conditions.map((cond, cIdx) => (
+                {(rule.conditions ?? []).map((cond, cIdx) => (
                   <Paper key={cIdx} withBorder p="xs" radius="sm" mb="xs" bg="var(--mantine-color-default-hover)">
                     <Group align="flex-end" gap="xs">
                       <TextInput

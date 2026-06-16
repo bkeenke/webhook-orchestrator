@@ -108,7 +108,7 @@ export function LogDetailModal({ logId, onClose }: Props) {
           <Group gap="xs" wrap="wrap">
             <Badge variant="light" color="gray" size="sm">IP: {log.client_ip}</Badge>
             <Badge variant="light" color="gray" size="sm">Size: {formatBytes(log.body_size)}</Badge>
-            {log.targets.map(t => (
+            {(log.targets ?? []).map(t => (
               <Badge key={t} variant="light" color="blue" size="sm">{t}</Badge>
             ))}
           </Group>
@@ -124,7 +124,7 @@ export function LogDetailModal({ logId, onClose }: Props) {
                 </Table.Tr>
               </Table.Thead>
               <Table.Tbody>
-                {Object.entries(log.headers).map(([k, v]) => (
+                {Object.entries(log.headers ?? {}).map(([k, v]) => (
                   <Table.Tr key={k}>
                     <Table.Td fw={500}>{k}</Table.Td>
                     <Table.Td style={{ wordBreak: 'break-all' }}>{v}</Table.Td>
@@ -141,10 +141,10 @@ export function LogDetailModal({ logId, onClose }: Props) {
 
           <Divider label="Target Responses" labelPosition="left" />
 
-          {Object.keys(log.target_responses).length === 0 ? (
+          {Object.keys(log.target_responses ?? {}).length === 0 ? (
             <Text size="xs" c="dimmed">No target responses recorded</Text>
           ) : (
-            Object.entries(log.target_responses).map(([targetId, resp]) => (
+            Object.entries(log.target_responses ?? {}).map(([targetId, resp]) => (
               <Paper key={targetId} withBorder p="sm" radius="sm">
                 <Stack gap="xs">
                   <Group gap="xs">

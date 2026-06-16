@@ -231,7 +231,7 @@ export function LogsPage() {
                     </Table.Td>
                     <Table.Td>
                       <Group gap={4} wrap="wrap">
-                        {log.targets.map(t => (
+                        {(log.targets ?? []).map(t => (
                           <Badge key={t} size="xs" variant="light" color="blue">{t}</Badge>
                         ))}
                       </Group>

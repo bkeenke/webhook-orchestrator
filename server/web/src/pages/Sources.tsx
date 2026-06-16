@@ -126,20 +126,20 @@ export function SourcesPage() {
                   </Badge>
                 </Group>
 
-                {source.rules.length > 0 && (
+                {(source.rules ?? []).length > 0 && (
                   <Stack gap={4}>
-                    {source.rules.map(rule => (
+                    {(source.rules ?? []).map(rule => (
                       <Group key={rule.id} gap={4} wrap="wrap">
                         <Text size="xs" c="dimmed" fw={500}>{rule.name || '(unnamed rule)'}:</Text>
-                        {rule.conditions.length === 0 ? (
+                        {(rule.conditions ?? []).length === 0 ? (
                           <Badge size="xs" color="orange" variant="dot">matches all</Badge>
                         ) : (
                           <Badge size="xs" color="gray" variant="outline">
-                            {rule.conditions.length} condition{rule.conditions.length !== 1 ? 's' : ''}
+                            {(rule.conditions ?? []).length} condition{(rule.conditions ?? []).length !== 1 ? 's' : ''}
                           </Badge>
                         )}
-                        {rule.targets.length > 0 && (
-                          <Text size="xs" c="dimmed">→ {rule.targets.join(', ')}</Text>
+                        {(rule.targets ?? []).length > 0 && (
+                          <Text size="xs" c="dimmed">→ {(rule.targets ?? []).join(', ')}</Text>
                         )}
                       </Group>
                     ))}

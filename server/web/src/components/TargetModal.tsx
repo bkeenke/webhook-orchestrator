@@ -236,7 +236,7 @@ export function TargetModal({ opened, target, onClose }: Props) {
               <TagsInput
                 label="Disable on Status Codes"
                 placeholder="e.g. 400, 401, 403"
-                value={form.retry.disable_on_status.map(String)}
+                value={(form.retry.disable_on_status ?? []).map(String)}
                 onChange={v => setRetry('disable_on_status', v.map(Number).filter(n => !isNaN(n)))}
                 size="sm"
                 description="Press Enter after each code"
@@ -245,7 +245,7 @@ export function TargetModal({ opened, target, onClose }: Props) {
               <TagsInput
                 label="Disable if Body Contains"
                 placeholder="e.g. not_found, invalid"
-                value={form.retry.disable_on_body_contains}
+                value={form.retry.disable_on_body_contains ?? []}
                 onChange={v => setRetry('disable_on_body_contains', v)}
                 size="sm"
                 description="Press Enter after each string"
